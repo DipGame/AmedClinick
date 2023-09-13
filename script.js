@@ -85,58 +85,179 @@ choiceBtn.forEach(el => {
 // Конец скрипта кнопки фильтра лево право и зависящих скриптов
 
 // Начало скрипта поиска
-const searchBtn = document.querySelector('.search');
-const searchInputContainer = document.querySelector('.search__input-container');
-const searchInput = searchInputContainer.querySelector('.search__input');
-const searchClearBtn = searchInputContainer.querySelector('.search__clear-btn')
-const searchContainer = searchInputContainer.querySelector('.search__container')
+const searchBtn = document.querySelectorAll('.search');
+const searchInputContainer = document.querySelectorAll('.search__input-container');
 
-window.addEventListener('click', (e) => {
-    if (e.target.id !== 'search') {
-        searchInputContainer.classList.add('invisibility');
-    }
-})
 
-searchBtn.addEventListener('click', () => {
-    searchInputContainer.classList.toggle('invisibility');
-})
+searchInputContainer.forEach(element => {
+    const searchInput = element.querySelector('.search__input');
+    const searchClearBtn = element.querySelector('.search__clear-btn')
+    const searchContainer = element.querySelector('.search__container')
 
-searchClearBtn.addEventListener('click', () => {
-    searchInput.value = "";
-    searchContainer.classList.add('invisibility');
-})
+    window.addEventListener('click', (e) => {
+        if (e.target.id !== 'search') {
+            element.classList.add('invisibility');
+        }
+    })
 
-searchInput.addEventListener('input', () => {
-    if (searchInput.value.length > 2) {
-        searchContainer.classList.remove('invisibility');
-    } else {
+    searchBtn.forEach(el => {
+        el.addEventListener('click', () => {
+            element.classList.toggle('invisibility');
+        })
+    })
+
+    searchClearBtn.addEventListener('click', () => {
+        searchInput.value = "";
         searchContainer.classList.add('invisibility');
-    }
-});
+    })
+
+    searchInput.addEventListener('input', () => {
+        if (searchInput.value.length > 2) {
+            searchContainer.classList.remove('invisibility');
+        } else {
+            searchContainer.classList.add('invisibility');
+        }
+    });
+})
+
+
 // Конец скрипта поиска
 
 // Начало скрипта обратной связи
 const overlayRecOnline = document.querySelectorAll('.overlayRecOnline');
+const recBtn = document.querySelectorAll('.rec-btn');
 
 overlayRecOnline.forEach(el => {
     const popupForm = el.querySelector('.popup-rec-online__form');
     const popupRecOnlineContainer = el.querySelectorAll('.popup-rec-online__container');
     const megionContainer = el.querySelector('#megionContainer');
+    const overlayCloseBtn = el.querySelector('.popup-rec-online__close-btn');
     const nignevartovskContainer = el.querySelector('#nignevartovskContainer');
     const popupRecOnlineName = el.querySelector('.popup-rec-online__name');
     const popupRecOnlineSurname = el.querySelector('.popup-rec-online__surname');
     const popupRecOnlineTel = el.querySelector('.popup-rec-online__tel');
     const popupRecOnlineComment = el.querySelector('.popup-rec-online__comment');
     const popupSubmitBtn = el.querySelector('.popup-rec-online__submit-btn');
+    const popupSpan = el.querySelectorAll('.popup-rec-online__span');
 
-    console.log(popupSubmitBtn.disable);
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('overlay')) {
+            overlayClose();
+        }
+    })
+
+    recBtn.forEach(element => {
+        element.addEventListener('click', () => {
+            if (el.id === element.id) {
+                overlayOpen();
+            }
+        })
+    })
+
+    overlayCloseBtn.addEventListener('click', () => {
+        overlayClose();
+    })
+
+    function overlayOpen() {
+        el.classList.add('overlay_open');
+    }
+
+    function overlayClose() {
+        el.classList.remove('overlay_open');
+    }
+
+    function addErr(name) {
+        popupSpan.forEach(el => {
+            if (name) {
+                if (el.id === name.name) {
+                    el.classList.add('popup-rec-online__span_open');
+                    name.classList.add('input__err');
+                }
+            } else {
+                if (el.id === 'citySpan') {
+                    el.classList.add('popup-rec-online__span_open');
+                }
+            }
+        })
+    }
+
+    function removeErr(name) {
+        popupSpan.forEach(el => {
+            if (name) {
+                if (el.id === name.name) {
+                    if (el.classList.contains('popup-rec-online__span_open')) {
+                        el.classList.remove('popup-rec-online__span_open');
+                        name.classList.remove('input__err');
+                    }
+                }
+            } else {
+                if (el.id === 'citySpan') {
+                    el.classList.remove('popup-rec-online__span_open');
+                }
+            }
+        })
+    }
+
+    function checkValidInput(elementInput) {
+        if (elementInput.name === 'phone') {
+            if (elementInput.value.length < 17) {
+                addErr(elementInput);
+                return false;
+            } else {
+                removeErr(elementInput);
+                return true;
+            }
+        }
+        if (elementInput.name === 'name') {
+            if (elementInput.value.length < 2) {
+                addErr(elementInput);
+                return false;
+            } else {
+                removeErr(elementInput);
+                return true;
+            }
+        }
+    }
+
+    function handleInputCheck(elementInput) {
+        checkValidInput(elementInput);
+        elementInput.addEventListener('input', () => {
+            checkValidInput(elementInput);
+        })
+        if (checkValidInput(elementInput)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function handleValidateCheck() {
+        handleInputCheck(popupRecOnlineName);
+        handleInputCheck(popupRecOnlineTel);
+        choiceErr();
+        if (handleInputCheck(popupRecOnlineName) && handleInputCheck(popupRecOnlineTel) && choiceErr()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function choiceErr() {
+        if (megionContainer.classList.contains('popup-rec-online__container_checked') || nignevartovskContainer.classList.contains('popup-rec-online__container_checked')) {
+            return true;
+        } else {
+            addErr();
+            return false;
+        }
+    }
 
     popupRecOnlineContainer.forEach(item => {
         item.addEventListener('click', (e) => {
+            removeErr();
             if (e.target.id === 'megion') {
                 megionContainer.classList.add('popup-rec-online__container_checked');
                 nignevartovskContainer.classList.remove('popup-rec-online__container_checked');
-            } else {
+            } if (e.target.id === 'nignevartovsk') {
                 nignevartovskContainer.classList.add('popup-rec-online__container_checked');
                 megionContainer.classList.remove('popup-rec-online__container_checked');
             }
@@ -145,15 +266,19 @@ overlayRecOnline.forEach(el => {
 
     popupForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        popupRecOnlineContainer.forEach(item => {
-            if (item.classList.contains('popup-rec-online__container_checked') && popupRecOnlineName.value && popupRecOnlineTel.value) {
-                console.log(item.querySelector('.city__name').textContent);
-                console.log(popupRecOnlineName.value);
-                console.log(popupRecOnlineSurname.value);
-                console.log(popupRecOnlineTel.value);
-                console.log(popupRecOnlineComment.value);
-            }
-        })
+        handleValidateCheck();
+        if (handleValidateCheck()) {
+            popupRecOnlineContainer.forEach(item => {
+                if (item.classList.contains('popup-rec-online__container_checked')) {
+                    console.log(item.querySelector('.city__name').textContent.trimStart());
+                }
+            })
+            console.log(popupRecOnlineName.value);
+            console.log(popupRecOnlineSurname.value);
+            console.log(popupRecOnlineTel.value);
+            console.log(popupRecOnlineComment.value);
+            overlayClose();
+        }
     })
 })
 // Конец скрипта обратной связи

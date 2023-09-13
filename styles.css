@@ -126,7 +126,8 @@ body {
 
 div,
 section {
-    width: 100%
+    width: 100%;
+    background-repeat: no-repeat;
 }
 
 img {
@@ -190,6 +191,7 @@ ul {
     opacity: 0;
     visibility: hidden;
     z-index: 21;
+    overflow-y: scroll;
 }
 
 .overlay_open {
@@ -202,8 +204,7 @@ ul {
     border-radius: 7px;
     transition: all 500ms ease;
     z-index: 20;
-    padding: 20px;
-    margin: 0 50px;
+    margin: 100px 50px 0;
     position: relative;
     width: 100%;
     max-width: 850px;
@@ -213,7 +214,8 @@ ul {
 
 .popup-rec-online__close-btn {
     margin-left: auto;
-    margin-top: 5px;
+    margin-top: 20px;
+    margin-right: 20px;
     cursor: url('images/finger\ 1.svg') 10 0, pointer;
 }
 
@@ -221,7 +223,7 @@ ul {
     display: flex;
     flex-direction: column;
     max-width: 630px;
-    margin: 0 auto 0;
+    margin: 20px auto 0;
 }
 
 .popup__title {
@@ -258,6 +260,7 @@ ul {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
+    position: relative;
 }
 
 .popup-rec-online__container {
@@ -385,7 +388,8 @@ ul {
     border: 1px solid rgba(10, 47, 69, 1);
 }
 
-.input__err {
+.input__err,
+.input__err:focus {
     background-color: rgba(242, 230, 232, 1);
     color: rgba(240, 65, 62, 1);
     border: 1px solid rgba(240, 65, 62, 1);
@@ -427,14 +431,49 @@ ul {
     opacity: 1;
 }
 
+#citySpan {
+    bottom: -10px;
+}
+
+.popup-rec-online__bottom-container {
+    border-top: 1px solid rgba(201, 216, 225, 1);
+}
+
+.popup-rec-online__bottom-container h3 {
+    display: block;
+    max-width: 630px;
+    margin: 34px auto 0;
+    font-family: Golos;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.popup-rec-online__bottom-container p {
+    display: block;
+    max-width: 630px;
+    margin: 25px auto 45px;
+    font-family: Golos;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: rgba(90, 90, 90, 1);
+}
 
 
 .header {
     padding: 0 20px;
+    background-color: #FFF;
+}
+
+.header__desctop {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #FFF;
 }
 
 .header__top {
@@ -449,6 +488,11 @@ ul {
     height: 36px;
     margin: auto 0 0;
     cursor: url('images/finger\ 1.svg') 10 0, pointer;
+}
+
+.header__logo {
+    background-image: url('images/Логотип.png');
+    object-fit: contain;
 }
 
 .header__right-container {
@@ -595,13 +639,19 @@ ul {
     margin-top: 37px;
 }
 
+.popup-rec-online__submit-btn:hover {
+    background-color: rgba(240, 65, 62, 1);
+    color: #FFF;
+}
+
 .login-btn {
     width: 100%;
     max-width: 190px;
-    margin: 0 30px auto 0;
+    margin: 3px 30px 0 0;
     background: none;
     border: 1px solid #016086;
     color: #016086;
+    /* text-indent: -9999em; */
 }
 
 .login-btn:hover {
@@ -610,7 +660,7 @@ ul {
 }
 
 .disabled-btn {
-    
+    opacity: .5;
 }
 
 .header__bottom {
@@ -662,6 +712,9 @@ ul {
     width: 25px;
     height: 25px;
     z-index: 6;
+    background-image: url('images/Search.png');
+    background-size: contain;
+
 }
 
 .search__input-container {
@@ -674,7 +727,7 @@ ul {
 
 .search__input {
     width: 100%;
-    max-width: 350px;
+    max-width: 340px;
     padding: 16px 82px 16px 20px;
     border-radius: 50px;
     border: 1px solid #407595;
@@ -817,6 +870,182 @@ ul {
 .header__bottom ul li:hover img {
     transform: rotate(180deg);
     transition: transform 0.5s;
+}
+
+.header-mobile {
+    visibility: hidden;
+    position: absolute;
+    height: 0;
+}
+
+@media (max-width: 1160px) {
+    .header {
+        padding: 0;
+    }
+
+    .header__desctop {
+        visibility: hidden;
+        position: absolute;
+        height: 0;
+        width: 0;
+        left: -9999px;
+    }
+
+    .header-mobile {
+        padding: 0 20px;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(212, 220, 225, 1);
+        max-height: 120px;
+    }
+
+    .search__input-container {
+        top: 36px;
+        right: 30px;
+    }
+
+    .search__container {
+        max-width: 400px;
+    }
+
+    .header-mobile {
+        visibility: visible;
+        position: static;
+        height: auto;
+        padding-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .header-mobile__top-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .header-mobile__logo {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-image: url('images/Логотип.png');
+
+    }
+
+    .header-mobile__menu-btn {
+        margin-left: 20px;
+    }
+
+    .header-mobile__container {
+        max-width: 80px;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 20px;
+    }
+
+    .rec-btn {
+        background: none;
+        color: rgba(240, 65, 62, 1);
+        transition: all .5s;
+    }
+
+    .header-mobile__rec-btn {
+        margin: 10px auto 0;
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .header__hidden-container {
+        position: fixed;
+        background-color: #FFF;
+        max-width: 375px;
+        box-sizing: border-box;
+        padding: 0 20px;
+        overflow-y: scroll;
+        height: 100vh;
+    }
+
+    .header__bottom {
+        width: 100%;
+    }
+
+    .header__bottom-menu {
+        flex-direction: column;
+    }
+
+    .header__bottom ul li .header__menu-second-floor {
+        position: stataic;
+        pointer-events: none;
+    }
+
+    .disabled:first-of-type {
+        margin-top: 15px;
+    }
+
+    .disabled {
+        pointer-events: none;
+        min-height: 50px;
+        display: flex;
+        border-bottom: 1px solid rgba(212, 220, 225, 1);
+        flex-direction: column;
+        border: 1px solid red;
+        justify-content: center;
+    }
+    
+    /* .header__bottom ul li .header__menu-second-floor {
+        max-height: 2000px;
+        visibility: visible;
+        position: static;
+    } */
+
+    .header__bottom ul li .header__menu-second-floor_open {
+        max-height: 2000px;
+        visibility: visible;
+        position: static;
+    }
+
+    .disabled a {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 545px) {
+    .header-mobile__logo {
+        background-image: url('images/Логотип\ mobile.png');
+        width: 83px;
+        height: 45px;
+    }
+
+    .search__input-container {
+        max-width: 300px;
+        right: 45px;
+    }
+
+    .search__input {
+        padding-right: 0;
+    }
+
+    .search__container {
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 345px) {
+    .header-mobile__menu-btn {
+        margin-left: 0;
+    }
+
+    .header-mobile__container {
+        margin-right: 0;
+    }
+
+    .search__input-container {
+        max-width: 250px;
+        right: 30px;
+    }
+
+    .search__container {
+        max-width: 230px;
+    }
 }
 
 
