@@ -373,20 +373,35 @@ function hiddenCard(card) {
     }
 }
 
+let staticWidth = 680;
+
 function hiddenSuperfluous() {
-    let num = 0;
+    
     // if (window.screen.width < 680) {
+    
+    offerContainerGrid.forEach(el => {
+        const offerCard = el.querySelectorAll('.offer__card');
+        let num = 0;
+        offerCard.forEach(element => {
+            if (element.classList.contains('offer__card-two-column')) {
+                invisibilityCard(element);
+            } else {
+                num++;
+                if (num > 4) {
+                    invisibilityCard(element);
+                }
+            }
+        })
+    })
+    
+}
+
+function visualSuperfluous() {    
     offerContainerGrid.forEach(el => {
         const offerCard = el.querySelectorAll('.offer__card');
         offerCard.forEach(element => {
-            if (!element.classList.contains('offer__card-two-column')) {
-                num++;
-                console.log(num);
-                if (num > 3) {
-                    
-                }
-            } else {
-                
+            if (element.classList.contains('invisibility')) {
+                visibleCard(element);
             }
         })
     })
@@ -395,7 +410,11 @@ function hiddenSuperfluous() {
 hiddenSuperfluous();
 
 window.addEventListener('resize', function () {
-    hiddenSuperfluous()
+    if (staticWidth > window.screen.width) {
+        hiddenSuperfluous();
+    } else {
+        visualSuperfluous();
+    }
 });
 
 // Конец Скрипта для предложений
