@@ -1,17 +1,14 @@
 // Начало настроек слайдера
 let swiper = new Swiper(".mySwiper", {
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
+
     pagination: {
         el: '.swiper-pagination',
         type: 'bullets',
     },
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-    },
+    // autoplay: {
+    //     delay: 5000,
+    //     disableOnInteraction: false,
+    // },
     loop: true,
 });
 
@@ -25,6 +22,43 @@ let docsSwiper = new Swiper(".docsSwiper", {
     }
 });
 // Конец настроек слайдера
+
+// Конец Скрипта спойлера скрытого мобильного меню
+const header = document.querySelector('.header');
+const headerMobileMenuBtn = header.querySelector('.header-mobile__menu-btn');
+const headerHiddenContainer = header.querySelector('.header__hidden-container');
+const headerHiddenContainerMenu = header.querySelectorAll('.disabled');
+
+function toggleMenu() {
+    headerHiddenContainer.classList.toggle('header__hidden-container_open');
+    headerMobileMenuBtn.classList.toggle('header-mobile__menu-btn_close');
+}
+
+headerMobileMenuBtn.addEventListener('click', () => {
+    toggleMenu();
+})
+
+headerHiddenContainer.addEventListener('swiped-left', () => {
+    toggleMenu();
+})
+
+// window.addEventListener('click', (e) => {
+//     console.log(e.target.id);
+// })
+
+headerHiddenContainerMenu.forEach(el => {
+    const headerMenuSecondFloor = el.querySelector('.header__menu-second-floor');
+    el.addEventListener('click', (e) => {
+        if (e.target.id === 'firstMenu') {
+            el.classList.toggle('disabled-color');
+            headerMenuSecondFloor.classList.toggle('header__menu-second-floor_open');
+            el.classList.toggle('disabled_none-border');
+        }
+    })
+})
+// Конец Скрипта спойлера скрытого мобильного меню
+
+
 
 // Начало скрипта кнопки фильтра лево право и зависящих скриптов
 const choiceBtn = document.querySelectorAll('.choice-filter-btn');
@@ -145,7 +179,6 @@ overlayRecOnline.forEach(el => {
             overlayClose();
         }
     })
-
     recBtn.forEach(element => {
         element.addEventListener('click', () => {
             if (el.id === element.id) {
@@ -318,3 +351,51 @@ window.addEventListener("DOMContentLoaded", function () {
     });
 });
 // Конец Скрипта маски телефона
+
+// Начало Скрипта для предложений
+const offer = document.querySelector('.offer');
+// const offerCard = offer.querySelectorAll('.offer__card');
+const offerContainerGrid = offer.querySelectorAll('.offer__container-grid');
+
+function invisibilityCard(card) {
+    card.classList.add('invisibility');
+}
+
+function visibleCard(card) {
+    card.classList.remove('invisibility');
+}
+
+function hiddenCard(card) {
+    if (window.screen.width < 686) {
+        invisibilityCard(card);
+    } else {
+        visibleCard(card);
+    }
+}
+
+function hiddenSuperfluous() {
+    let num = 0;
+    // if (window.screen.width < 680) {
+    offerContainerGrid.forEach(el => {
+        const offerCard = el.querySelectorAll('.offer__card');
+        offerCard.forEach(element => {
+            if (!element.classList.contains('offer__card-two-column')) {
+                num++;
+                console.log(num);
+                if (num > 3) {
+                    
+                }
+            } else {
+                
+            }
+        })
+    })
+}
+
+hiddenSuperfluous();
+
+window.addEventListener('resize', function () {
+    hiddenSuperfluous()
+});
+
+// Конец Скрипта для предложений
