@@ -5,22 +5,97 @@ let swiper = new Swiper(".mySwiper", {
         el: '.swiper-pagination',
         type: 'bullets',
     },
-    // autoplay: {
-    //     delay: 5000,
-    //     disableOnInteraction: false,
-    // },
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+    },
     loop: true,
 });
 
 let docsSwiper = new Swiper(".docsSwiper", {
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+    },
     loop: true,
     breakpoints: {
-        640: {
+        300: {
+            slidesPerView: 1,
+            spaceBetween: 0
+        },
+        680: {
+            slidesPerView: 3,
+            spaceBetween: 10
+        },
+        1011: {
+            slidesPerView: 4,
+            spaceBetween: 20
+        },
+        1340: {
+            slidesPerView: 5,
+            spaceBetween: 30
+        },
+        1432: {
             slidesPerView: 6,
             spaceBetween: 30
-        }
+        },
     }
 });
+
+let reviewsSwiper = new Swiper(".reviewsSwiper", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    navigation: {
+        nextEl: '.reviews-swiper-button-next',
+        prevEl: '.reviews-swiper-button-prev',
+    },
+    // autoplay: {
+    //     delay: 5000,
+    //     disableOnInteraction: false,
+    // },
+    loop: false,
+    breakpoints: {
+        866: {
+            slidesPerView: 2,
+            spaceBetween: 30
+        },
+        1281: {
+            slidesPerView: 3,
+            spaceBetween: 30
+        },
+    }
+});
+
+let licenceSwiper = new Swiper(".licenceSwiper", {
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+    },
+    loop: true,
+    breakpoints: {
+        300: {
+            slidesPerView: 1,
+            spaceBetween: 0
+        },
+        546: {
+            slidesPerView: 2,
+            spaceBetween: 10
+        },
+        800: {
+            slidesPerView: 3,
+            spaceBetween: 10
+        },
+        1011: {
+            slidesPerView: 4,
+            spaceBetween: 20
+        },
+        1340: {
+            slidesPerView: 5,
+            spaceBetween: 30
+        },
+    }
+});
+
 // Конец настроек слайдера
 
 // Конец Скрипта спойлера скрытого мобильного меню
@@ -72,6 +147,9 @@ const docsStudy = document.getElementById('docsStudy');
 const nignevartovskDocs = document.getElementById('nignevartovskDocs');
 const megionDocs = document.getElementById('megionDocs');
 
+const reviewsVideo = document.getElementById('reviewsVideo');
+const reviewsPhoto = document.getElementById('reviewsPhoto');
+
 choiceBtn.forEach(el => {
     const colorChoiceDiv = el.querySelector('.choice-filter-btn__color');
     const titleChoice = el.querySelectorAll('.choice-filter-btn__title');
@@ -112,6 +190,16 @@ choiceBtn.forEach(el => {
             } else {
                 megionDocs.classList.add('invisibility');
                 nignevartovskDocs.classList.remove('invisibility');
+            }
+        }
+        // Для фото - видео
+        if (el.classList.contains('reviews__btn-choice')) {
+            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                reviewsPhoto.classList.remove('invisibility');
+                reviewsVideo.classList.add('invisibility');
+            } else {
+                reviewsPhoto.classList.add('invisibility');
+                reviewsVideo.classList.remove('invisibility');
             }
         }
     })
@@ -353,68 +441,66 @@ window.addEventListener("DOMContentLoaded", function () {
 // Конец Скрипта маски телефона
 
 // Начало Скрипта для предложений
-const offer = document.querySelector('.offer');
-// const offerCard = offer.querySelectorAll('.offer__card');
-const offerContainerGrid = offer.querySelectorAll('.offer__container-grid');
+if (document.querySelector('.offer')) {
+    const offer = document.querySelector('.offer');
+    const offerContainerGrid = offer.querySelectorAll('.offer__container-grid');
 
-function invisibilityCard(card) {
-    card.classList.add('invisibility');
-}
+    let staticWidth = 680;
 
-function visibleCard(card) {
-    card.classList.remove('invisibility');
-}
-
-function hiddenCard(card) {
-    if (window.screen.width < 686) {
-        invisibilityCard(card);
-    } else {
-        visibleCard(card);
+    function invisibilityCard(card) {
+        card.classList.add('invisibility');
     }
-}
 
-let staticWidth = 680;
+    function visibleCard(card) {
+        card.classList.remove('invisibility');
+    }
 
-function hiddenSuperfluous() {
-    
-    // if (window.screen.width < 680) {
-    
-    offerContainerGrid.forEach(el => {
-        const offerCard = el.querySelectorAll('.offer__card');
-        let num = 0;
-        offerCard.forEach(element => {
-            if (element.classList.contains('offer__card-two-column')) {
-                invisibilityCard(element);
-            } else {
-                num++;
-                if (num > 4) {
-                    invisibilityCard(element);
-                }
-            }
-        })
-    })
-    
-}
+    function hiddenCard(card) {
+        if (window.screen.width < 686) {
+            invisibilityCard(card);
+        } else {
+            visibleCard(card);
+        }
+    }
 
-function visualSuperfluous() {    
-    offerContainerGrid.forEach(el => {
-        const offerCard = el.querySelectorAll('.offer__card');
-        offerCard.forEach(element => {
-            if (element.classList.contains('invisibility')) {
-                visibleCard(element);
-            }
-        })
-    })
-}
+    function hiddenSuperfluous() {
+        if (staticWidth > window.screen.width) {
 
-hiddenSuperfluous();
+            offerContainerGrid.forEach(el => {
+                const offerCard = el.querySelectorAll('.offer__card');
+                let num = 0;
+                offerCard.forEach(element => {
+                    if (element.classList.contains('offer__card-two-column')) {
+                        invisibilityCard(element);
+                    } else {
+                        num++;
+                        if (num > 4) {
+                            invisibilityCard(element);
+                        }
+                    }
+                })
+            })
+        }
+    }
 
-window.addEventListener('resize', function () {
-    if (staticWidth > window.screen.width) {
+    function visualSuperfluous() {
+        if (staticWidth <= window.screen.width) {
+            offerContainerGrid.forEach(el => {
+                const offerCard = el.querySelectorAll('.offer__card');
+                offerCard.forEach(element => {
+                    if (element.classList.contains('invisibility')) {
+                        visibleCard(element);
+                    }
+                })
+            })
+        }
+    }
+
+    hiddenSuperfluous();
+
+    window.addEventListener('resize', function () {
         hiddenSuperfluous();
-    } else {
         visualSuperfluous();
-    }
-});
-
+    });
+}
 // Конец Скрипта для предложений
