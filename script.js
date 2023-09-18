@@ -150,17 +150,33 @@ const megionDocs = document.getElementById('megionDocs');
 const reviewsVideo = document.getElementById('reviewsVideo');
 const reviewsPhoto = document.getElementById('reviewsPhoto');
 
+const servicesForPeople = document.getElementById('servicesForPeople');
+const servicesForOrganizaci = document.getElementById('servicesForOrganizaci');
+
 choiceBtn.forEach(el => {
     const colorChoiceDiv = el.querySelector('.choice-filter-btn__color');
     const titleChoice = el.querySelectorAll('.choice-filter-btn__title');
-    el.addEventListener('click', () => {
-        colorChoiceDiv.classList.toggle('choice-filter-btn__color-right');
-        if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
-            titleChoice[1].classList.add('choice-filter-btn__title-color');
-            titleChoice[0].classList.remove('choice-filter-btn__title-color');
+    el.addEventListener('click', (e) => {
+        if (!colorChoiceDiv.classList.contains('invisibility')) {
+            colorChoiceDiv.classList.toggle('choice-filter-btn__color-right');
+            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                titleChoice[1].classList.add('choice-filter-btn__title-color');
+                titleChoice[0].classList.remove('choice-filter-btn__title-color');
+            } else {
+                titleChoice[0].classList.add('choice-filter-btn__title-color');
+                titleChoice[1].classList.remove('choice-filter-btn__title-color');
+            }
         } else {
-            titleChoice[0].classList.add('choice-filter-btn__title-color');
-            titleChoice[1].classList.remove('choice-filter-btn__title-color');
+            colorChoiceDiv.classList.remove('invisibility');
+            if (e.target.id === 'nignevartovskBtn') {
+                colorChoiceDiv.classList.remove('choice-filter-btn__color-right');
+                titleChoice[0].classList.add('choice-filter-btn__title-color');
+                titleChoice[1].classList.remove('choice-filter-btn__title-color');
+            } else {
+                colorChoiceDiv.classList.add('choice-filter-btn__color-right');
+                titleChoice[1].classList.add('choice-filter-btn__title-color');
+                titleChoice[0].classList.remove('choice-filter-btn__title-color');
+            }
         }
         // Для предложений
         if (el.classList.contains('offer__btn-choice')) {
@@ -200,6 +216,16 @@ choiceBtn.forEach(el => {
             } else {
                 reviewsPhoto.classList.add('invisibility');
                 reviewsVideo.classList.remove('invisibility');
+            }
+        }
+        // Для страницы услуг
+        if (el.classList.contains('services__btn-choice')) {
+            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                servicesForOrganizaci.classList.remove('invisibility');
+                servicesForPeople.classList.add('invisibility');
+            } else {
+                servicesForOrganizaci.classList.add('invisibility');
+                servicesForPeople.classList.remove('invisibility');
             }
         }
     })
@@ -352,11 +378,11 @@ overlayRecOnline.forEach(el => {
         }
     }
 
-    function handleValidateCheck() {
-        handleInputCheck(popupRecOnlineName);
-        handleInputCheck(popupRecOnlineTel);
+    function handleValidateCheck(nameInput, telInput) {
+        handleInputCheck(nameInput);
+        handleInputCheck(telInput);
         choiceErr();
-        if (handleInputCheck(popupRecOnlineName) && handleInputCheck(popupRecOnlineTel) && choiceErr()) {
+        if (handleInputCheck(nameInput) && handleInputCheck(telInput) && choiceErr()) {
             return true;
         } else {
             return false;
@@ -387,8 +413,8 @@ overlayRecOnline.forEach(el => {
 
     popupForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        handleValidateCheck();
-        if (handleValidateCheck()) {
+        handleValidateCheck(popupRecOnlineName, popupRecOnlineTel);
+        if (handleValidateCheck(popupRecOnlineName, popupRecOnlineTel)) {
             popupRecOnlineContainer.forEach(item => {
                 if (item.classList.contains('popup-rec-online__container_checked')) {
                     console.log(item.querySelector('.city__name').textContent.trimStart());
@@ -403,6 +429,136 @@ overlayRecOnline.forEach(el => {
     })
 })
 // Конец скрипта обратной связи
+
+// НАчало скрипта обратной связи банер
+if (document.querySelector('.callback-baner')) {
+    const callbackBaner = document.querySelector('.callback-baner');
+    const callbackForm = callbackBaner.querySelector('.popup-rec-online__form');
+    const callbackRecOnlineName = callbackBaner.querySelector('.popup-rec-online__name');
+    const callbackRecOnlineTel = callbackBaner.querySelector('.popup-rec-online__tel');
+    const callbackSubmitBtn = callbackBaner.querySelector('.popup-rec-online__submit-btn');
+    const callbackSpan = callbackBaner.querySelectorAll('.popup-rec-online__span');
+    const callbackChoiceFilterBtn = callbackBaner.querySelector('.choice-filter-btn');
+    const callbackChoiceFilterBtnColor = callbackBaner.querySelector('.choice-filter-btn__color');
+    const callbackChoiceFilterBtnTitle = callbackBaner.querySelectorAll('.choice-filter-btn__title');
+
+    callbackChoiceFilterBtn.addEventListener('click', () => {
+        removeCallBackErr();
+    })
+
+    function addCallBackErr(name) {
+        callbackSpan.forEach(el => {
+            if (name) {
+                if (el.id === name.name) {
+                    el.classList.add('popup-rec-online__span_open');
+                    name.classList.add('input__err');
+                }
+            } else {
+                if (el.id === 'callbackSpan') {
+                    el.classList.add('popup-rec-online__span_open');
+                }
+            }
+        })
+    }
+
+    function removeCallBackErr(name) {
+        callbackSpan.forEach(el => {
+            if (name) {
+                if (el.id === name.name) {
+                    if (el.classList.contains('popup-rec-online__span_open')) {
+                        el.classList.remove('popup-rec-online__span_open');
+                        name.classList.remove('input__err');
+                    }
+                }
+            } else {
+                if (el.id === 'callbackSpan') {
+                    el.classList.remove('popup-rec-online__span_open');
+                }
+            }
+        })
+    }
+
+    function choiceCallBackErr() {
+        if (callbackChoiceFilterBtnColor.classList.contains('invisibility')) {
+            addCallBackErr();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function clearInputs() {
+        callbackRecOnlineName.value = '';
+        callbackRecOnlineTel.value = '';
+        callbackChoiceFilterBtnColor.classList.remove('choice-filter-btn__color-right');
+        callbackChoiceFilterBtnColor.classList.add('invisibility');
+        callbackChoiceFilterBtnTitle.forEach(el => {
+            if (el.classList.contains('choice-filter-btn__title-color')) {
+                el.classList.remove('choice-filter-btn__title-color');
+            }
+        })
+    }
+
+    function checkCallBackValidInput(elementInput) {
+        if (elementInput.name === 'phone') {
+            if (elementInput.value.length < 17) {
+                addCallBackErr(elementInput);
+                return false;
+            } else {
+                removeCallBackErr(elementInput);
+                return true;
+            }
+        }
+        if (elementInput.name === 'name') {
+            if (elementInput.value.length < 2) {
+                addCallBackErr(elementInput);
+                return false;
+            } else {
+                removeCallBackErr(elementInput);
+                return true;
+            }
+        }
+    }
+
+    function handleCallBackInputCheck(elementInput) {
+        checkCallBackValidInput(elementInput);
+        elementInput.addEventListener('input', () => {
+            checkCallBackValidInput(elementInput);
+        })
+        if (checkCallBackValidInput(elementInput)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function handleCallBackValidateCheck(nameInput, telInput) {
+        handleCallBackInputCheck(nameInput);
+        handleCallBackInputCheck(telInput);
+        choiceCallBackErr();
+        if (handleCallBackInputCheck(nameInput) && handleCallBackInputCheck(telInput) && choiceCallBackErr()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    callbackForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleCallBackValidateCheck(callbackRecOnlineName, callbackRecOnlineTel);
+        if (handleCallBackValidateCheck(callbackRecOnlineName, callbackRecOnlineTel)) {
+            callbackChoiceFilterBtnTitle.forEach(el => {
+                if (el.classList.contains('choice-filter-btn__title-color')) {
+                    console.log(el.textContent.trimStart());
+                }
+            })
+            console.log(callbackRecOnlineName.value);
+            console.log(callbackRecOnlineTel.value);
+            clearInputs();
+        }
+    })
+}
+// Конец скрипта обратной связи банер
 
 // Начало Скрипта маски телефона
 window.addEventListener("DOMContentLoaded", function () {
