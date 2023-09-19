@@ -66,6 +66,30 @@ let reviewsSwiper = new Swiper(".reviewsSwiper", {
     }
 });
 
+let reviewsSwiperTwo = new Swiper(".reviewsSwiperTwo", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    navigation: {
+        nextEl: '.ddd-next',
+        prevEl: '.ddd-prev',
+    },
+    // autoplay: {
+    //     delay: 5000,
+    //     disableOnInteraction: false,
+    // },
+    loop: false,
+    breakpoints: {
+        866: {
+            slidesPerView: 2,
+            spaceBetween: 30
+        },
+        1281: {
+            slidesPerView: 3,
+            spaceBetween: 30
+        },
+    }
+});
+
 let licenceSwiper = new Swiper(".licenceSwiper", {
     autoplay: {
         delay: 5000,
@@ -153,6 +177,15 @@ const reviewsPhoto = document.getElementById('reviewsPhoto');
 const servicesForPeople = document.getElementById('servicesForPeople');
 const servicesForOrganizaci = document.getElementById('servicesForOrganizaci');
 
+const fmcDescription = document.getElementById('fmcDescription');
+const fmcPreparation = document.getElementById('fmcPreparation');
+
+const nignevartovskDoctors = document.getElementById('nignevartovskDoctors');
+const megionDoctors = document.getElementById('megionDoctors');
+
+const fotoNign = document.getElementById('fotoNign');
+const fotoMegion = document.getElementById('fotoMegion');
+
 choiceBtn.forEach(el => {
     const colorChoiceDiv = el.querySelector('.choice-filter-btn__color');
     const titleChoice = el.querySelectorAll('.choice-filter-btn__title');
@@ -198,6 +231,16 @@ choiceBtn.forEach(el => {
                 docsAppointment.classList.remove('invisibility');
             }
         }
+        // Для наши специалисты
+        if (el.classList.contains('specialistPeople__btn-choice')) {
+            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                megionDoctors.classList.remove('invisibility');
+                nignevartovskDoctors.classList.add('invisibility');
+            } else {
+                megionDoctors.classList.add('invisibility');
+                nignevartovskDoctors.classList.remove('invisibility');
+            }
+        }
         // Для списка врачей
         if (el.classList.contains('docs__btn-choice')) {
             if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
@@ -226,6 +269,26 @@ choiceBtn.forEach(el => {
             } else {
                 servicesForOrganizaci.classList.add('invisibility');
                 servicesForPeople.classList.remove('invisibility');
+            }
+        }
+        // Для страницы услуг
+        if (el.classList.contains('fmc__btn-choice')) {
+            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                fmcPreparation.classList.remove('invisibility');
+                fmcDescription.classList.add('invisibility');
+            } else {
+                fmcPreparation.classList.add('invisibility');
+                fmcDescription.classList.remove('invisibility');
+            }
+        }
+        // Для Фото клиник
+        if (el.classList.contains('clinic__btn-choice')) {
+            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                fotoMegion.classList.remove('invisibility');
+                fotoNign.classList.add('invisibility');
+            } else {
+                fotoMegion.classList.add('invisibility');
+                fotoNign.classList.remove('invisibility');
             }
         }
     })
