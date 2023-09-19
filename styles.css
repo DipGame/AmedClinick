@@ -4116,3 +4116,8 @@ ul {
     letter-spacing: 0em;
     text-align: left;
 }
+
+.politica .fmc__background {
+    max-width: 1290px;
+    margin: 0 auto 70px;
+}
