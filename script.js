@@ -1,6 +1,9 @@
 // Начало настроек слайдера
 let swiper = new Swiper(".mySwiper", {
-
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
     pagination: {
         el: '.swiper-pagination',
         type: 'bullets',
@@ -64,6 +67,19 @@ let reviewsSwiper = new Swiper(".reviewsSwiper", {
             spaceBetween: 30
         },
     }
+});
+let popupSwiper = new Swiper(".popupSwiper", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    navigation: {
+        nextEl: '.popup-swiper-button-next',
+        prevEl: '.popup-swiper-button-prev',
+    },
+    // autoplay: {
+    //     delay: 5000,
+    //     disableOnInteraction: false,
+    // },
+    loop: false,
 });
 
 let reviewsSwiperTwo = new Swiper(".reviewsSwiperTwo", {
@@ -334,22 +350,92 @@ searchInputContainer.forEach(element => {
 
 // Конец скрипта поиска
 
+// Начало скрипта попапа картинок
+const overlayImg = document.querySelector('.overlayImg');
+const popupImg = overlayImg.querySelector('.popupImg');
+const popupSwiperWrapper = overlayImg.querySelector('.swiper-wrapper');
+const popupClose = overlayImg.querySelector('.popup-rec-online__close-btn');
+
+function overlayOpen() {
+    overlayImg.classList.add('overlay_open');
+}
+
+function overlayClose() {
+    overlayImg.classList.remove('overlay_open');
+    popupSwiperWrapper.innerHTML = "";
+}
+
+window.addEventListener('click', (e) => {
+    if (e.target.classList.contains('overlay')) {
+        overlayClose();
+    }
+    
+    if (e.target.alt === 'kartinka') {
+        overlayOpen();
+        let imageArr = e.target.offsetParent.offsetParent.childNodes;
+        let arr = [];
+        imageArr.forEach(el => {
+            if (el.localName) {
+                let copy = el.cloneNode(true);
+                arr.push(copy);
+                popupSwiperWrapper.appendChild(copy);
+                el.id = 1;
+            }
+        })
+        console.log(arr[0]);
+    }
+})
+
+popupClose.addEventListener('click', () => {
+    overlayClose();
+})
+
+const swiperSlide = overlayImg.querySelector('.swiper-slide');
+
+
+
+console.log(popupSwiperWrapper);
+// Конец скрипта попапа картинок
+
 // Начало скрипта обратной связи
 const overlayRecOnline = document.querySelectorAll('.overlayRecOnline');
 const recBtn = document.querySelectorAll('.rec-btn');
+const appBtn = document.querySelectorAll('.app-btn');
 
 overlayRecOnline.forEach(el => {
     const popupForm = el.querySelector('.popup-rec-online__form');
+    const popupRecOnline = el.querySelector('.popup-rec-online');
     const popupRecOnlineContainer = el.querySelectorAll('.popup-rec-online__container');
     const megionContainer = el.querySelector('#megionContainer');
     const overlayCloseBtn = el.querySelector('.popup-rec-online__close-btn');
     const nignevartovskContainer = el.querySelector('#nignevartovskContainer');
-    const popupRecOnlineName = el.querySelector('.popup-rec-online__name');
+    const popupRecOnlineName = el.querySelector('#inputName');
+
     const popupRecOnlineSurname = el.querySelector('.popup-rec-online__surname');
     const popupRecOnlineTel = el.querySelector('.popup-rec-online__tel');
     const popupRecOnlineComment = el.querySelector('.popup-rec-online__comment');
     const popupSubmitBtn = el.querySelector('.popup-rec-online__submit-btn');
     const popupSpan = el.querySelectorAll('.popup-rec-online__span');
+    const popupBottomContainer = el.querySelector('.popup-rec-online__bottom-container');
+    const popupTitle = el.querySelector('.popup__title');
+    const popupLinkTitle = el.querySelector('.popup__link-title');
+
+    if (el.id === 'app') {
+        const popupRecOnlineDate = el.querySelector('#inputDate');
+
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth();
+        if (month < 10) {
+            month = '0' + month;
+        }
+        let day = date.getDate();
+        if (day < 10) {
+            day = '0' + day;
+        }
+        let nowDate = year + '-' + month + "-" + day;
+        popupRecOnlineDate.value = nowDate;
+    }
 
     window.addEventListener('click', (e) => {
         if (e.target.classList.contains('overlay')) {
@@ -357,6 +443,13 @@ overlayRecOnline.forEach(el => {
         }
     })
     recBtn.forEach(element => {
+        element.addEventListener('click', () => {
+            if (el.id === element.id) {
+                overlayOpen();
+            }
+        })
+    })
+    appBtn.forEach(element => {
         element.addEventListener('click', () => {
             if (el.id === element.id) {
                 overlayOpen();
@@ -471,6 +564,13 @@ overlayRecOnline.forEach(el => {
                 nignevartovskContainer.classList.add('popup-rec-online__container_checked');
                 megionContainer.classList.remove('popup-rec-online__container_checked');
             }
+            if (e.target.id === 'megionOne') {
+                megionContainer.classList.add('popup-rec-online__container_checked');
+                nignevartovskContainer.classList.remove('popup-rec-online__container_checked');
+            } if (e.target.id === 'nignevartovskOne') {
+                nignevartovskContainer.classList.add('popup-rec-online__container_checked');
+                megionContainer.classList.remove('popup-rec-online__container_checked');
+            }
         })
     })
 
@@ -483,11 +583,21 @@ overlayRecOnline.forEach(el => {
                     console.log(item.querySelector('.city__name').textContent.trimStart());
                 }
             })
+            if (el.id === 'app') {
+                console.log(el.querySelector('#inputDate').value);
+            }
             console.log(popupRecOnlineName.value);
             console.log(popupRecOnlineSurname.value);
             console.log(popupRecOnlineTel.value);
             console.log(popupRecOnlineComment.value);
-            overlayClose();
+            popupForm.classList.add('invisibility');
+            popupBottomContainer.classList.add('invisibility');
+            popupLinkTitle.classList.add('invisibility');
+            popupRecOnline.classList.add('popup__height');
+            popupTitle.textContent = 'Спасибо, форма успешно отправленна! Мы вам перезвоним!'
+            setTimeout(() => {
+                overlayClose();
+            }, 3500);
         }
     })
 })
@@ -502,6 +612,8 @@ if (document.querySelector('.callback-baner')) {
     const callbackSubmitBtn = callbackBaner.querySelector('.popup-rec-online__submit-btn');
     const callbackSpan = callbackBaner.querySelectorAll('.popup-rec-online__span');
     const callbackChoiceFilterBtn = callbackBaner.querySelector('.choice-filter-btn');
+    const callbackTitle = callbackBaner.querySelector('.callback-baner__title');
+    const callbackLinkText = callbackBaner.querySelector('.callback-baner__link-text');
     const callbackChoiceFilterBtnColor = callbackBaner.querySelector('.choice-filter-btn__color');
     const callbackChoiceFilterBtnTitle = callbackBaner.querySelectorAll('.choice-filter-btn__title');
 
@@ -551,15 +663,7 @@ if (document.querySelector('.callback-baner')) {
     }
 
     function clearInputs() {
-        callbackRecOnlineName.value = '';
-        callbackRecOnlineTel.value = '';
-        callbackChoiceFilterBtnColor.classList.remove('choice-filter-btn__color-right');
-        callbackChoiceFilterBtnColor.classList.add('invisibility');
-        callbackChoiceFilterBtnTitle.forEach(el => {
-            if (el.classList.contains('choice-filter-btn__title-color')) {
-                el.classList.remove('choice-filter-btn__title-color');
-            }
-        })
+        callbackForm.classList.add('invisibility');
     }
 
     function checkCallBackValidInput(elementInput) {
@@ -618,6 +722,8 @@ if (document.querySelector('.callback-baner')) {
             console.log(callbackRecOnlineName.value);
             console.log(callbackRecOnlineTel.value);
             clearInputs();
+            callbackTitle.textContent = 'Спасибо, форма успешно отправленна! Мы вам перезвоним!'
+            callbackLinkText.textContent = '';
         }
     })
 }

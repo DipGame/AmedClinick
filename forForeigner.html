@@ -645,7 +645,7 @@
                                     5 050 ₽
                                 </span>
                                 <div class="foreigner__button-container">
-                                    <button class="rec-btn" id="rec">
+                                    <button class="rec-btn" id="app">
                                         Записаться
                                     </button>
                                     <button class="rec-btn login-btn">
@@ -677,7 +677,7 @@
                                     5 050 ₽
                                 </span>
                                 <div class="foreigner__button-container">
-                                    <button class="rec-btn" id="rec">
+                                    <button class="rec-btn" id="app">
                                         Записаться
                                     </button>
                                     <button class="rec-btn login-btn">
@@ -709,7 +709,7 @@
                                     5 050 ₽
                                 </span>
                                 <div class="foreigner__button-container">
-                                    <button class="rec-btn" id="rec">
+                                    <button class="rec-btn" id="app">
                                         Записаться
                                     </button>
                                     <button class="rec-btn login-btn">
@@ -1132,7 +1132,130 @@
             </div>
         </div>
     </div>
-
+    <div class="overlay overlayRecOnline" id="app">
+        <div class="popup popup-rec-online" id="appPopup">
+            <img class="popup-rec-online__close-btn" src="images/Vector.svg" alt="close">
+            <div class="popup__container">
+                <h3 class="popup__title">
+                    Оставить заявку на запись
+                </h3>
+                <a class="popup__link-title">
+                    Медкомиссия для ФМС
+                </a>
+                <form class="popup-rec-online__form">
+                    <p class="popup-rec-online__title">
+                        Выберите клинику: <span>*</span>
+                    </p>
+                    <div class="popup-rec-online__flex-container">
+                        <div class="popup-rec-online__container" id="megionContainer">
+                            <input type="radio" name="city" id="megionOne">
+                            <label for="megionOne">
+                                <div class="label__container label__container__checked">
+                                    <p class="city__name">
+                                        г. Мегион,
+                                    </p>
+                                    <p class="city__adress">
+                                        Нефтников 33, 2 этаж
+                                    </p>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="popup-rec-online__container" id="nignevartovskContainer">
+                            <input type="radio" name="city" id="nignevartovskOne">
+                            <label for="nignevartovskOne">
+                                <div class="label__container">
+                                    <p class="city__name">
+                                        г. Нижневартовск,
+                                    </p>
+                                    <p class="city__adress">
+                                        Мира 63, 5 этаж
+                                    </p>
+                                </div>
+                            </label>
+                        </div>
+                        <span class="popup-rec-online__span" id="citySpan">
+                            Пожалуйста, выберите город
+                        </span>
+                    </div>
+                    <p class="popup-rec-online__title" style="margin: 30px 0 20px;">
+                        Дата и время желаемого посещения:
+                    </p>
+                    <div class="popup-rec-online__name-container">
+                        <div class="popup-rec-online__name-input-container">
+                            <input class="popup-rec-online__name" type="date" name="data" id="inputDate">
+                        </div>
+                        <div class="popup-rec-online__name-input-container">
+                            <select class="popup-rec-online__name" id="select">
+                                <option>10:00</option>
+                                <option>11:00</option>
+                                <option>12:00</option>
+                                <option>13:00</option>
+                                <option>14:00</option>
+                                <option>15:00</option>
+                                <option>16:00</option>
+                                <option>17:00</option>
+                                <option>18:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="popup-rec-online__input-title ">
+                        <span>Внимание!</span> Дата и время является желаемым. Точное время для записи
+                        вам сообщит специалист по звонку, после отправки заявки.
+                    </p>
+                    <p class="popup-rec-online__title">
+                        Ваши данные
+                    </p>
+                    <div class="popup-rec-online__name-container">
+                        <div class="popup-rec-online__name-input-container">
+                            <p class="popup-rec-online__input-title ">
+                                Ваше имя <span>*</span>
+                            </p>
+                            <input class="popup-rec-online__name" type="text" placeholder="Имя" name="name"
+                                id="inputName">
+                            <span class="popup-rec-online__span" id="name">
+                                Обязательное поле для заполнения
+                            </span>
+                        </div>
+                        <div class="popup-rec-online__name-input-container">
+                            <p class="popup-rec-online__input-title">
+                                Ваша фамилия
+                            </p>
+                            <input class="popup-rec-online__name popup-rec-online__surname" type="text"
+                                placeholder="Фамилия">
+                        </div>
+                    </div>
+                    <div class="popup-rec-online__name-input-container popup-rec-online__name-input-container-tel">
+                        <p class="popup-rec-online__input-title">
+                            Телефон для связи <span>*</span>
+                        </p>
+                        <input class="popup-rec-online__name popup-rec-online__tel" name="phone" type="text"
+                            placeholder="+7 (___) ___ ____">
+                        <span class="popup-rec-online__span" id="phone">
+                            Обязательное поле для заполнения
+                        </span>
+                    </div>
+                    <div class="popup-rec-online__name-input-container popup-rec-online__name-input-container-comment">
+                        <p class="popup-rec-online__input-title">
+                            Коментарий
+                        </p>
+                        <input class="popup-rec-online__name popup-rec-online__comment" type="text">
+                    </div>
+                    <button class="rec-btn popup-rec-online__submit-btn" type="submit">
+                        Записаться
+                    </button>
+                </form>
+            </div>
+            <div class="popup-rec-online__bottom-container">
+                <h3>
+                    После отправки заявки с вами свяжется специалист
+                </h3>
+                <p>
+                    Ваши данные в безопасности, согласно 152 ФЗ РФ. Отправляя данную форму, вы соглашаетесь с
+                    политикой конфиденциальности персональных данных.
+                </p>
+            </div>
+        </div>
+    </div>
     <script src="swiped-events.js"></script>
     <script src="swiper-bundle.js"></script>
     <script src="script.js"></script>

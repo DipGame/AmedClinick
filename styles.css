@@ -195,7 +195,7 @@ ul {
     transition: opacity 0.3s ease;
     opacity: 0;
     visibility: hidden;
-    z-index: 21;
+    z-index: 0;
     overflow-y: scroll;
     transform: translateX(-101%);
 }
@@ -205,6 +205,7 @@ ul {
     visibility: visible;
     transform: translateX(0);
     transition: opacity 0.3s ease;
+    z-index: 21;
 }
 
 .popup {
@@ -222,6 +223,36 @@ ul {
     left: 50%;
     transform: translateX(-56%);
     min-height: 985px;
+}
+
+.popupImg {
+    min-height: fit-content;
+    height: fit-content;
+    max-height: 700px;
+    box-sizing: border-box;
+    padding: 20px;
+    top: 50%;
+    transform: translateX(-56%) translateY(-50%);
+}
+
+.popupImg .swiper-wrapper img {
+    max-height: 500px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
+
+.popupImg .popup-rec-online__close-btn {
+    margin: 0;
+    margin-left: auto;
+}
+
+.popup__height {
+    min-height: auto;
+}
+
+#appPopup {
+    min-height: 1200px;
 }
 
 .popup-rec-online__close-btn {
@@ -316,6 +347,7 @@ ul {
 }
 
 .popup-rec-online__container label:before {
+
     content: "";
     display: inline-block;
     width: 25px;
@@ -738,6 +770,22 @@ ul {
         margin: 0;
         min-height: 1400px;
         transform: translateX(-50%);
+    }
+
+    #appPopup {
+        min-height: 1800px;
+    }
+
+    .popupImg {
+        min-height: fit-content;
+        height: fit-content;
+        max-height: 700px;
+        top: 50%;
+        transform: translateX(-56%) translateY(-50%);
+    }
+
+    .popup__height {
+        min-height: auto;
     }
 
     .popup__container {
@@ -1634,7 +1682,7 @@ ul {
 }
 
 .offer__card-title-link:hover {
-    opacity: .8;
+    color: rgba(240, 65, 62, 1);
 }
 
 .offer__card-text-bottom {
@@ -1680,7 +1728,7 @@ ul {
 }
 
 .offer__container-list li a:hover {
-    opacity: .8;
+    color: rgba(240, 65, 62, 1);
 }
 
 .offer__card-two-column {
@@ -1836,6 +1884,7 @@ ul {
 
 .docs-appointment__list-grid a:hover {
     transform: scale(1.05);
+    color: rgba(240, 65, 62, 1);
 }
 
 .docs-appointment__list-grid img {
@@ -2212,12 +2261,14 @@ ul {
 }
 
 .reviews-swiper-button-prev,
-.ddd-prev {
+.ddd-prev,
+.popup-swiper-button-prev {
     background-image: url('images/navPrev.svg');
 }
 
 .reviews-swiper-button-next,
-.ddd-next {
+.ddd-next,
+.popup-swiper-button-next {
     background-image: url('images/navNext.svg');
 }
 
@@ -2225,6 +2276,12 @@ ul {
 .swiper-rtl .reviews-swiper-button-next:after,
 .reviews-swiper-button-prev:after,
 .swiper-rtl .reviews-swiper-button-prev:after,
+
+.popup-swiper-button-next:after,
+.swiper-rtl .popup-swiper-button-next:after,
+.popup-swiper-button-prev:after,
+.swiper-rtl .popup-swiper-button-prev:after,
+
 .ddd-next:after,
 .swiper-rtl .ddd-next:after,
 .ddd-prev:after,
@@ -2234,7 +2291,9 @@ ul {
 
 
 .reviews-swiper-button-prev,
-.reviews-swiper-button-next {
+.reviews-swiper-button-next,
+.popup-swiper-button-prev,
+.popup-swiper-button-next {
     width: 50px;
     height: 50px;
     background-size: contain;
@@ -2366,6 +2425,7 @@ ul {
     line-height: 58px;
     letter-spacing: 0em;
     text-align: left;
+    max-width: 800px;
 }
 
 .callback-baner__link-text {
@@ -4117,7 +4177,200 @@ ul {
     text-align: left;
 }
 
-.politica .fmc__background {
-    max-width: 1290px;
-    margin: 0 auto 70px;
+.politica {
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+
+.politica .fmc__adress {
+    max-width: none;
+}
+
+.politica .fmc__adress-card {
+    max-width: none;
+    flex-direction: column;
+}
+
+.politica .fmc__adress-card:last-of-type {
+    margin-left: 20px;
+}
+
+.politica .header__adress-title {
+    font-family: Golos;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.politica .header__adress-title span {
+    font-family: Golos;
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 43px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.politica__top-container {
+    display: flex;
+}
+
+.politica .politica__bold-text {
+    font-weight: 600;
+    font-family: Golos;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.politica b {
+    font-family: Golos;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.politica .header__adress-phone {
+    font-family: Golos;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.politica .fmc__text {
+    padding: 20px 10px;
+}
+
+.politica iframe {
+    width: 100%;
+    height: 320px;
+}
+
+.contacts__admin-title {
+    font-family: Golos;
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 43px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.contacts__grid-container {
+    display: grid;
+    grid-template-columns: 410px 410px 410px;
+    gap: 30px;
+    margin-bottom: 100px;
+    margin-top: 20px;
+}
+
+.contacts__card {
+    box-sizing: border-box;
+    padding: 40px 50px;
+    background-color: #FFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    justify-content: space-between;
+}
+
+.contacts__name {
+    font-family: Golos;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.contacts__card-bottom-container p {
+    font-family: Golos;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.contacts__card-bottom-container p span {
+    font-family: Golos;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: rgba(240, 65, 62, 1);
+}
+
+@media (max-width: 932px) {
+    .politica .fmc__adress-container {
+        flex-direction: column;
+    }
+
+    .politica .fmc__adress-card:last-of-type {
+        margin-left: 0px;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 524px) {
+    .politica .header__adress-title {
+        font-family: Golos;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 22px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+    .politica .header__adress-title span {
+        font-family: Golos;
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 36px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+}
+
+@media (max-width: 372px) {
+    .politica .header__adress-title span {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 1392px) {
+    .contacts__grid-container {
+        grid-template-columns: 410px 410px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 924px) {
+    .contacts__grid-container {
+        grid-template-columns: 410px;
+    }
+}
+
+@media (max-width: 476px) {
+    .contacts__card {
+        width: 335px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 370px) {
+    .contacts__card {
+        width: 280px;
+        padding: 20px;
+    }
 }
