@@ -419,6 +419,7 @@ const recBtn = document.querySelectorAll('.rec-btn');
 const appBtn = document.querySelectorAll('.app-btn');
 
 overlayRecOnline.forEach(el => {
+    const popup = el.querySelector('.popup');
     const popupForm = el.querySelector('.popup-rec-online__form');
     const popupRecOnline = el.querySelector('.popup-rec-online');
     const popupRecOnlineContainer = el.querySelectorAll('.popup-rec-online__container');
@@ -610,6 +611,8 @@ overlayRecOnline.forEach(el => {
             popupBottomContainer.classList.add('invisibility');
             popupLinkTitle.classList.add('invisibility');
             popupRecOnline.classList.add('popup__height');
+            popupTitle.style.cssText = "text-align: center; margin: auto; padding-bottom: 70px;"
+            popup.style.cssText = "margin: 0;"
             popupTitle.textContent = 'Спасибо, форма успешно отправленна! Мы вам перезвоним!'
             setTimeout(() => {
                 overlayClose();

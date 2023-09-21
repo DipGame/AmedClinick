@@ -209,7 +209,7 @@ ul {
 }
 
 .popup {
-    background-color: #FFF;
+    /* background-color: #FFF;
     border-radius: 7px;
     transition: all 500ms ease;
     z-index: 20;
@@ -222,7 +222,19 @@ ul {
     top: 100px;
     left: 50%;
     transform: translateX(-56%);
-    min-height: 985px;
+    min-height: 985px; */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    max-width: 850px;
+    background-color: #FFF;
+    display: flex;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 10px;
+    flex-direction: column;
+    margin: 100px 0;
 }
 
 .popupImg {
@@ -821,7 +833,7 @@ ul {
     .popup {
         max-width: 500px;
         margin: 0;
-        min-height: 1400px;
+        top: 10%;
         transform: translateX(-50%);
     }
 
