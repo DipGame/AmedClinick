@@ -121,8 +121,9 @@ let licenceSwiper = new Swiper(".licenceSwiper", {
 
 // Конец настроек слайдера
 
-// Конец Скрипта спойлера скрытого мобильного меню
+// Начало Скрипта спойлера скрытого мобильного меню
 const header = document.querySelector('.header');
+const headerMobile = header.querySelector('.header-mobile');
 const headerMobileMenuBtn = header.querySelector('.header-mobile__menu-btn');
 const headerHiddenContainer = header.querySelector('.header__hidden-container');
 const headerHiddenContainerMenu = header.querySelectorAll('.disabled');
@@ -130,6 +131,8 @@ const headerHiddenContainerMenu = header.querySelectorAll('.disabled');
 function toggleMenu() {
     headerHiddenContainer.classList.toggle('header__hidden-container_open');
     headerMobileMenuBtn.classList.toggle('header-mobile__menu-btn_close');
+    headerMobile.classList.toggle('header-mobile_fixed');
+    
 }
 
 headerMobileMenuBtn.addEventListener('click', () => {

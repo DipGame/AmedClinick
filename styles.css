@@ -1089,6 +1089,8 @@ ul {
     height: 0;
 }
 
+
+
 .header__hidden-container {
     visibility: hidden;
     position: absolute;
@@ -1124,6 +1126,10 @@ ul {
         border-bottom: 1px solid rgba(212, 220, 225, 1);
         max-height: 120px;
         z-index: 15;
+    }
+
+    .header-mobile_fixed {
+        position: fixed;
     }
 
     .search__input-container {
