@@ -610,7 +610,6 @@ overlayRecOnline.forEach(el => {
             popupForm.classList.add('invisibility');
             popupBottomContainer.classList.add('invisibility');
             popupLinkTitle.classList.add('invisibility');
-            popupRecOnline.classList.add('popup__height');
             popupTitle.style.cssText = "text-align: center; margin: auto; padding-bottom: 70px;"
             popup.style.cssText = "margin: 0;"
             popupTitle.textContent = 'Спасибо, форма успешно отправленна! Мы вам перезвоним!'

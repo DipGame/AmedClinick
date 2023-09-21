@@ -285,9 +285,9 @@ ul {
     min-height: auto;
 }
 
-#appPopup {
+/* #appPopup {
     min-height: 1200px;
-}
+} */
 
 .popup-rec-online__close-btn {
     margin-left: auto;
@@ -837,9 +837,9 @@ ul {
         transform: translateX(-50%);
     }
 
-    #appPopup {
+    /* #appPopup {
         min-height: 1800px;
-    }
+    } */
 
     .popup__height {
         min-height: auto;
