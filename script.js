@@ -128,11 +128,17 @@ const headerMobileMenuBtn = header.querySelector('.header-mobile__menu-btn');
 const headerHiddenContainer = header.querySelector('.header__hidden-container');
 const headerHiddenContainerMenu = header.querySelectorAll('.disabled');
 
+window.addEventListener('click', (e) => {
+    if (!e.target.offsetParent.classList.contains('header__bottom') && !e.target.offsetParent.classList.contains('header__hidden-container')) {
+        if (!e.target.classList.contains('header-mobile__menu-btn')) {
+            toggleMenu();
+        }
+    }
+})
+
 function toggleMenu() {
     headerHiddenContainer.classList.toggle('header__hidden-container_open');
     headerMobileMenuBtn.classList.toggle('header-mobile__menu-btn_close');
-    // headerMobile.classList.toggle('header-mobile_fixed');
-    
 }
 
 headerMobileMenuBtn.addEventListener('click', () => {
@@ -142,10 +148,6 @@ headerMobileMenuBtn.addEventListener('click', () => {
 headerHiddenContainer.addEventListener('swiped-left', () => {
     toggleMenu();
 })
-
-// window.addEventListener('click', (e) => {
-//     console.log(e.target.id);
-// })
 
 headerHiddenContainerMenu.forEach(el => {
     const headerMenuSecondFloor = el.querySelector('.header__menu-second-floor');
@@ -159,142 +161,161 @@ headerHiddenContainerMenu.forEach(el => {
 })
 // Конец Скрипта спойлера скрытого мобильного меню
 
-
-
-// Начало скрипта кнопки фильтра лево право и зависящих скриптов
-const choiceBtn = document.querySelectorAll('.choice-filter-btn');
-
-const organizationPers = document.getElementById('organizationPers');
-const naturalPers = document.getElementById('naturalPers');
-
-const docsAppointment = document.getElementById('docsAppointment');
-const docsStudy = document.getElementById('docsStudy');
-
-const nignevartovskDocs = document.getElementById('nignevartovskDocs');
-const megionDocs = document.getElementById('megionDocs');
-
-const reviewsVideo = document.getElementById('reviewsVideo');
-const reviewsPhoto = document.getElementById('reviewsPhoto');
-
-const servicesForPeople = document.getElementById('servicesForPeople');
-const servicesForOrganizaci = document.getElementById('servicesForOrganizaci');
-
-const fmcDescription = document.getElementById('fmcDescription');
-const fmcPreparation = document.getElementById('fmcPreparation');
-
-const nignevartovskDoctors = document.getElementById('nignevartovskDoctors');
-const megionDoctors = document.getElementById('megionDoctors');
-
-const fotoNign = document.getElementById('fotoNign');
-const fotoMegion = document.getElementById('fotoMegion');
-
-choiceBtn.forEach(el => {
-    const colorChoiceDiv = el.querySelector('.choice-filter-btn__color');
-    const titleChoice = el.querySelectorAll('.choice-filter-btn__title');
+// Начало Скрипта спойлера скрытого личного кабинета
+const loginBtn = header.querySelectorAll('#lk');
+const loginContainer = header.querySelectorAll('.login__container');
+window.addEventListener('click', (e) => {
+    if (e.target.id !== "lk-list" && e.target.id !== "lk") {
+        loginContainer.forEach(element => {
+            element.classList.add('invisibility');
+        })
+    }
+})
+loginBtn.forEach(el => {
     el.addEventListener('click', (e) => {
-        if (!colorChoiceDiv.classList.contains('invisibility')) {
-            colorChoiceDiv.classList.toggle('choice-filter-btn__color-right');
-            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
-                titleChoice[1].classList.add('choice-filter-btn__title-color');
-                titleChoice[0].classList.remove('choice-filter-btn__title-color');
-            } else {
-                titleChoice[0].classList.add('choice-filter-btn__title-color');
-                titleChoice[1].classList.remove('choice-filter-btn__title-color');
-            }
-        } else {
-            colorChoiceDiv.classList.remove('invisibility');
-            if (e.target.id === 'nignevartovskBtn') {
-                colorChoiceDiv.classList.remove('choice-filter-btn__color-right');
-                titleChoice[0].classList.add('choice-filter-btn__title-color');
-                titleChoice[1].classList.remove('choice-filter-btn__title-color');
-            } else {
-                colorChoiceDiv.classList.add('choice-filter-btn__color-right');
-                titleChoice[1].classList.add('choice-filter-btn__title-color');
-                titleChoice[0].classList.remove('choice-filter-btn__title-color');
-            }
-        }
-        // Для предложений
-        if (el.classList.contains('offer__btn-choice')) {
-            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
-                organizationPers.classList.remove('invisibility');
-                naturalPers.classList.add('invisibility');
-            } else {
-                organizationPers.classList.add('invisibility');
-                naturalPers.classList.remove('invisibility');
-            }
-        }
-        // Для прием врачей
-        if (el.classList.contains('docs-appointment__btn-choice')) {
-            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
-                docsStudy.classList.remove('invisibility');
-                docsAppointment.classList.add('invisibility');
-            } else {
-                docsStudy.classList.add('invisibility');
-                docsAppointment.classList.remove('invisibility');
-            }
-        }
-        // Для наши специалисты
-        if (el.classList.contains('specialistPeople__btn-choice')) {
-            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
-                megionDoctors.classList.remove('invisibility');
-                nignevartovskDoctors.classList.add('invisibility');
-            } else {
-                megionDoctors.classList.add('invisibility');
-                nignevartovskDoctors.classList.remove('invisibility');
-            }
-        }
-        // Для списка врачей
-        if (el.classList.contains('docs__btn-choice')) {
-            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
-                megionDocs.classList.remove('invisibility');
-                nignevartovskDocs.classList.add('invisibility');
-            } else {
-                megionDocs.classList.add('invisibility');
-                nignevartovskDocs.classList.remove('invisibility');
-            }
-        }
-        // Для фото - видео
-        if (el.classList.contains('reviews__btn-choice')) {
-            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
-                reviewsPhoto.classList.remove('invisibility');
-                reviewsVideo.classList.add('invisibility');
-            } else {
-                reviewsPhoto.classList.add('invisibility');
-                reviewsVideo.classList.remove('invisibility');
-            }
-        }
-        // Для страницы услуг
-        if (el.classList.contains('services__btn-choice')) {
-            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
-                servicesForOrganizaci.classList.remove('invisibility');
-                servicesForPeople.classList.add('invisibility');
-            } else {
-                servicesForOrganizaci.classList.add('invisibility');
-                servicesForPeople.classList.remove('invisibility');
-            }
-        }
-        // Для страницы услуг
-        if (el.classList.contains('fmc__btn-choice')) {
-            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
-                fmcPreparation.classList.remove('invisibility');
-                fmcDescription.classList.add('invisibility');
-            } else {
-                fmcPreparation.classList.add('invisibility');
-                fmcDescription.classList.remove('invisibility');
-            }
-        }
-        // Для Фото клиник
-        if (el.classList.contains('clinic__btn-choice')) {
-            if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
-                fotoMegion.classList.remove('invisibility');
-                fotoNign.classList.add('invisibility');
-            } else {
-                fotoMegion.classList.add('invisibility');
-                fotoNign.classList.remove('invisibility');
-            }
-        }
+        loginContainer.forEach(element => {
+            element.classList.toggle('invisibility');
+        })
     })
 })
+// Конец Скрипта спойлера скрытого личного кабинета
+
+// Начало скрипта кнопки фильтра лево право и зависящих скриптов
+if (document.querySelector('.choice-filter-btn')) {
+    const choiceBtn = document.querySelectorAll('.choice-filter-btn');
+
+    const organizationPers = document.getElementById('organizationPers');
+    const naturalPers = document.getElementById('naturalPers');
+
+    const docsAppointment = document.getElementById('docsAppointment');
+    const docsStudy = document.getElementById('docsStudy');
+
+    const nignevartovskDocs = document.getElementById('nignevartovskDocs');
+    const megionDocs = document.getElementById('megionDocs');
+
+    const reviewsVideo = document.getElementById('reviewsVideo');
+    const reviewsPhoto = document.getElementById('reviewsPhoto');
+
+    const servicesForPeople = document.getElementById('servicesForPeople');
+    const servicesForOrganizaci = document.getElementById('servicesForOrganizaci');
+
+    const fmcDescription = document.getElementById('fmcDescription');
+    const fmcPreparation = document.getElementById('fmcPreparation');
+
+    const nignevartovskDoctors = document.getElementById('nignevartovskDoctors');
+    const megionDoctors = document.getElementById('megionDoctors');
+
+    const fotoNign = document.getElementById('fotoNign');
+    const fotoMegion = document.getElementById('fotoMegion');
+
+    choiceBtn.forEach(el => {
+        const colorChoiceDiv = el.querySelector('.choice-filter-btn__color');
+        const titleChoice = el.querySelectorAll('.choice-filter-btn__title');
+        el.addEventListener('click', (e) => {
+            if (!colorChoiceDiv.classList.contains('invisibility')) {
+                colorChoiceDiv.classList.toggle('choice-filter-btn__color-right');
+                if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                    titleChoice[1].classList.add('choice-filter-btn__title-color');
+                    titleChoice[0].classList.remove('choice-filter-btn__title-color');
+                } else {
+                    titleChoice[0].classList.add('choice-filter-btn__title-color');
+                    titleChoice[1].classList.remove('choice-filter-btn__title-color');
+                }
+            } else {
+                colorChoiceDiv.classList.remove('invisibility');
+                if (e.target.id === 'nignevartovskBtn') {
+                    colorChoiceDiv.classList.remove('choice-filter-btn__color-right');
+                    titleChoice[0].classList.add('choice-filter-btn__title-color');
+                    titleChoice[1].classList.remove('choice-filter-btn__title-color');
+                } else {
+                    colorChoiceDiv.classList.add('choice-filter-btn__color-right');
+                    titleChoice[1].classList.add('choice-filter-btn__title-color');
+                    titleChoice[0].classList.remove('choice-filter-btn__title-color');
+                }
+            }
+            // Для предложений
+            if (el.classList.contains('offer__btn-choice')) {
+                if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                    organizationPers.classList.remove('invisibility');
+                    naturalPers.classList.add('invisibility');
+                } else {
+                    organizationPers.classList.add('invisibility');
+                    naturalPers.classList.remove('invisibility');
+                }
+            }
+            // Для прием врачей
+            if (el.classList.contains('docs-appointment__btn-choice')) {
+                if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                    docsStudy.classList.remove('invisibility');
+                    docsAppointment.classList.add('invisibility');
+                } else {
+                    docsStudy.classList.add('invisibility');
+                    docsAppointment.classList.remove('invisibility');
+                }
+            }
+            // Для наши специалисты
+            if (el.classList.contains('specialistPeople__btn-choice')) {
+                if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                    megionDoctors.classList.remove('invisibility');
+                    nignevartovskDoctors.classList.add('invisibility');
+                } else {
+                    megionDoctors.classList.add('invisibility');
+                    nignevartovskDoctors.classList.remove('invisibility');
+                }
+            }
+            // Для списка врачей
+            if (el.classList.contains('docs__btn-choice')) {
+                if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                    megionDocs.classList.remove('invisibility');
+                    nignevartovskDocs.classList.add('invisibility');
+                } else {
+                    megionDocs.classList.add('invisibility');
+                    nignevartovskDocs.classList.remove('invisibility');
+                }
+            }
+            // Для фото - видео
+            if (el.classList.contains('reviews__btn-choice')) {
+                if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                    reviewsPhoto.classList.remove('invisibility');
+                    reviewsVideo.classList.add('invisibility');
+                } else {
+                    reviewsPhoto.classList.add('invisibility');
+                    reviewsVideo.classList.remove('invisibility');
+                }
+            }
+            // Для страницы услуг
+            if (el.classList.contains('services__btn-choice')) {
+                if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                    servicesForOrganizaci.classList.remove('invisibility');
+                    servicesForPeople.classList.add('invisibility');
+                } else {
+                    servicesForOrganizaci.classList.add('invisibility');
+                    servicesForPeople.classList.remove('invisibility');
+                }
+            }
+            // Для страницы услуг
+            if (el.classList.contains('fmc__btn-choice')) {
+                if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                    fmcPreparation.classList.remove('invisibility');
+                    fmcDescription.classList.add('invisibility');
+                } else {
+                    fmcPreparation.classList.add('invisibility');
+                    fmcDescription.classList.remove('invisibility');
+                }
+            }
+            // Для Фото клиник
+            if (el.classList.contains('clinic__btn-choice')) {
+                if (colorChoiceDiv.classList.contains('choice-filter-btn__color-right')) {
+                    fotoMegion.classList.remove('invisibility');
+                    fotoNign.classList.add('invisibility');
+                } else {
+                    fotoMegion.classList.add('invisibility');
+                    fotoNign.classList.remove('invisibility');
+                }
+            }
+        })
+    })
+}
 // Конец скрипта кнопки фильтра лево право и зависящих скриптов
 
 // Начало скрипта поиска
@@ -376,7 +397,6 @@ window.addEventListener('click', (e) => {
             },
             loop: false,
         });
-        console.log(numIdImg);
         overlayOpen();
         popupClose.addEventListener('click', () => {
             overlayClose();
@@ -419,8 +439,7 @@ overlayRecOnline.forEach(el => {
         const popupRecOnlineDate = el.querySelector('#inputDate');
         let date = new Date();
         let year = date.getFullYear();
-        let month = date.getMonth()+1;
-        console.log(month);
+        let month = date.getMonth() + 1;
         if (month < 10) {
             month = '0' + month;
         }
@@ -436,7 +455,6 @@ overlayRecOnline.forEach(el => {
         if (e.target.classList.contains('overlay')) {
             overlayClose();
         }
-        console.log(el.id === e.target.id);
     })
     recBtn.forEach(element => {
         element.addEventListener('click', () => {

@@ -777,6 +777,37 @@ ul {
     color: #FFF;
 }
 
+.login__container {
+    position: absolute;
+    left: 0;
+    box-sizing: border-box;
+    padding: 0 20px;
+    z-index: 30;
+    top: 120px;
+}
+.login__container ul {
+    background-color: rgba(237, 243, 244, 1);
+    border: 1px solid #FFF;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.login__container li:first-of-type {
+    border: none;
+}
+
+.login__container li {
+    border-top: 1px solid #C9D8E1;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.login__container li:hover a {
+    color: rgba(240, 65, 62, 1);
+}
+
 .disabled-btn {
     opacity: .5;
 }
@@ -1165,7 +1196,6 @@ ul {
 
     .header-mobile__menu-btn_close {
         background-image: url('images/Меню\ \(1\).svg');
-        position: fixed;
     }
 
     .header-mobile__container {
@@ -1200,7 +1230,7 @@ ul {
         background-color: #FFF;
         max-width: 375px;
         box-sizing: border-box;
-        padding: 100px 20px 0;
+        padding: 100px 20px 50px;
         overflow-y: scroll;
         height: 100vh;
         visibility: visible;
