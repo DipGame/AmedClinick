@@ -68,19 +68,7 @@ let reviewsSwiper = new Swiper(".reviewsSwiper", {
         },
     }
 });
-let popupSwiper = new Swiper(".popupSwiper", {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    navigation: {
-        nextEl: '.popup-swiper-button-next',
-        prevEl: '.popup-swiper-button-prev',
-    },
-    // autoplay: {
-    //     delay: 5000,
-    //     disableOnInteraction: false,
-    // },
-    loop: false,
-});
+
 
 let reviewsSwiperTwo = new Swiper(".reviewsSwiperTwo", {
     slidesPerView: 1,
@@ -107,11 +95,6 @@ let reviewsSwiperTwo = new Swiper(".reviewsSwiperTwo", {
 });
 
 let licenceSwiper = new Swiper(".licenceSwiper", {
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-    },
-    loop: true,
     breakpoints: {
         300: {
             slidesPerView: 1,
@@ -366,35 +349,44 @@ function overlayClose() {
 }
 
 window.addEventListener('click', (e) => {
-    if (e.target.classList.contains('overlay')) {
-        overlayClose();
-    }
-    
-    if (e.target.alt === 'kartinka') {
-        overlayOpen();
+    if (e.target.alt === 'kartinka') { // По Alt определеям картинки, которые нужно вывести в слайдер попапа
         let imageArr = e.target.offsetParent.offsetParent.childNodes;
         let arr = [];
+        let num = 0;
         imageArr.forEach(el => {
             if (el.localName) {
+                el.id = num;
+                num++;
                 let copy = el.cloneNode(true);
                 arr.push(copy);
                 popupSwiperWrapper.appendChild(copy);
-                el.id = 1;
             }
         })
-        console.log(arr[0]);
+        var numIdImg = e.target.offsetParent.id;
+        let popupSwiper = new Swiper(".popupSwiper", {
+            slidesPerView: 1,
+            initialSlide: e.target.offsetParent.id,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: '.popup-swiper-button-next',
+                prevEl: '.popup-swiper-button-prev',
+            },
+            loop: false,
+        });
+        console.log(numIdImg);
+        overlayOpen();
+        popupClose.addEventListener('click', () => {
+            overlayClose();
+            popupSwiper.destroy(true, true);
+        })
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('overlay')) {
+                overlayClose();
+                popupSwiper.destroy(true, true);
+            }
+        })
     }
 })
-
-popupClose.addEventListener('click', () => {
-    overlayClose();
-})
-
-const swiperSlide = overlayImg.querySelector('.swiper-slide');
-
-
-
-console.log(popupSwiperWrapper);
 // Конец скрипта попапа картинок
 
 // Начало скрипта обратной связи
@@ -422,10 +414,10 @@ overlayRecOnline.forEach(el => {
 
     if (el.id === 'app') {
         const popupRecOnlineDate = el.querySelector('#inputDate');
-
         let date = new Date();
         let year = date.getFullYear();
-        let month = date.getMonth();
+        let month = date.getMonth()+1;
+        console.log(month);
         if (month < 10) {
             month = '0' + month;
         }
@@ -441,6 +433,7 @@ overlayRecOnline.forEach(el => {
         if (e.target.classList.contains('overlay')) {
             overlayClose();
         }
+        console.log(el.id === e.target.id);
     })
     recBtn.forEach(element => {
         element.addEventListener('click', () => {
@@ -585,6 +578,7 @@ overlayRecOnline.forEach(el => {
             })
             if (el.id === 'app') {
                 console.log(el.querySelector('#inputDate').value);
+                console.log(el.querySelector('#select').value);
             }
             console.log(popupRecOnlineName.value);
             console.log(popupRecOnlineSurname.value);

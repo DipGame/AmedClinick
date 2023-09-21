@@ -662,7 +662,7 @@
                             <p class="fmc__stock-title fmc__stock-title-total">
                                 Первичный приём <span>1500 ₽</span>
                             </p>
-                            <button class="rec-online-btn" id="rec-online">
+                            <button class="rec-btn rec-online-btn" id="app">
                                 Записаться
                             </button>
                         </div>
@@ -1208,7 +1208,7 @@
                             <p class="popup-rec-online__input-title ">
                                 Ваше имя <span>*</span>
                             </p>
-                            <input class="popup-rec-online__name" type="text" placeholder="Имя" name="name">
+                            <input class="popup-rec-online__name" type="text" placeholder="Имя" name="name" id="inputName">
                             <span class="popup-rec-online__span" id="name">
                                 Обязательное поле для заполнения
                             </span>
@@ -1374,6 +1374,22 @@
                     Ваши данные в безопасности, согласно 152 ФЗ РФ. Отправляя данную форму, вы соглашаетесь с
                     политикой конфиденциальности персональных данных.
                 </p>
+            </div>
+        </div>
+    </div>
+    <div class="overlay overlayImg">
+        <div class="popupImg">
+             <img class="popup-rec-online__close-btn" src="images/Vector.svg" alt="close">
+            <div class="swiper__container" id="reviewsPhoto">
+                <div class="swiper popupSwiper">
+                    <div class="swiper-wrapper" data-swiper-autoplay="2000" >
+                        
+                    </div>
+                </div>
+                <div class="swiper__nav-container">
+                    <div class="swiper-button-next popup-swiper-button-next"></div>
+                    <div class="swiper-button-prev popup-swiper-button-prev"></div>
+                </div>
             </div>
         </div>
     </div>
