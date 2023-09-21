@@ -192,12 +192,13 @@ ul {
     position: fixed;
     display: flex;
     top: 0px;
-    transition: opacity 0.3s ease;
+    
     opacity: 0;
     visibility: hidden;
     z-index: 0;
     overflow-y: scroll;
     transform: translateX(-101%);
+    transition: opacity 1s;
 }
 
 .overlay_open {
@@ -225,8 +226,8 @@ ul {
     min-height: 985px; */
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    top: 10px;
+    transform: translateX(-50%);
     max-width: 850px;
     background-color: #FFF;
     display: flex;
