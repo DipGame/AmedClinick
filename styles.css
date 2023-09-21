@@ -2164,6 +2164,7 @@ ul {
 
     .brief-description__text-container {
         max-width: none;
+        margin: 40px 0 0;
     }
 
     .brief-description .more-btn {
