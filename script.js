@@ -131,7 +131,8 @@ const headerHiddenContainerMenu = header.querySelectorAll('.disabled');
 window.addEventListener('click', (e) => {
     if (!e.target.offsetParent.classList.contains('header__bottom') && !e.target.offsetParent.classList.contains('header__hidden-container')) {
         if (!e.target.classList.contains('header-mobile__menu-btn')) {
-            toggleMenu();
+            headerHiddenContainer.classList.remove('header__hidden-container_open');
+            headerMobileMenuBtn.classList.remove('header-mobile__menu-btn_close');
         }
     }
 })
