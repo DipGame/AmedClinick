@@ -131,7 +131,7 @@ const headerHiddenContainerMenu = header.querySelectorAll('.disabled');
 function toggleMenu() {
     headerHiddenContainer.classList.toggle('header__hidden-container_open');
     headerMobileMenuBtn.classList.toggle('header-mobile__menu-btn_close');
-    headerMobile.classList.toggle('header-mobile_fixed');
+    // headerMobile.classList.toggle('header-mobile_fixed');
     
 }
 
